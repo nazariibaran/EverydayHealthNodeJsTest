@@ -1,15 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 
+import NewsletterTrackingService from '@/services/newsletterTracking.service';
+
 class NewsletterController {
-  // public userService = new userService();
+  public csvService = new NewsletterTrackingService();
 
   public getNewsletterSummary = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const newsletterId = Number(req.params.id);
 
-      //TODO: return count per day for the given user_id
+      const data = await this.csvService.getNewsletterCountPerDayByNewsletterId(newsletterId);
 
-      res.status(200).json({ data: newsletterId, message: 'newsletterId' });
+      res.status(200).json({ data, message: 'Success' });
     } catch (error) {
       next(error);
     }
@@ -19,9 +21,9 @@ class NewsletterController {
     try {
       const newsletterId = Number(req.params.id);
 
-      //TODO: return daily open and click action counts for given newsletter_id
+      const data = await this.csvService.getNewsletterActivityCountsByNewsletterId(newsletterId);
 
-      res.status(200).json({ data: newsletterId, message: 'newsletter action Id' });
+      res.status(200).json({ data, message: 'Success' });
     } catch (error) {
       next(error);
     }

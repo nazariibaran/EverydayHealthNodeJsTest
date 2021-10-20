@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 
-// import userService from '@/services/user.service';
+import NewsletterTrackingService from '@/services/newsletterTracking.service';
 
 class UserController {
-  // public userService = new userService();
+  public csvService = new NewsletterTrackingService();
 
   public getUserSummary = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userId = Number(req.params.id);
 
-      //TODO: return count per day for the given user_id
+      const data = await this.csvService.getUserCountPerDayByUserId(userId);
 
-      res.status(200).json({ data: userId, message: 'userId' });
+      res.status(200).json({ data, message: 'Success' });
     } catch (error) {
       next(error);
     }

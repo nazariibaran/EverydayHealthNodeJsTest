@@ -1,126 +1,52 @@
-tags:
-- name: users
-  description: users API
-
 paths:
-# [GET] users
-  /users:
+  # [GET] User Summary by User Id
+  /user/summary/:id:
     get:
       tags:
-      - users
-      summary: Find All Users
+        - users
+      summary: Find User summary by Id
+      parameters:
+        - name: id
+          in: params
+          required: true
       responses:
         200:
           description: 'OK'
         500:
           description: 'Server Error'
 
-# [POST] users
-    post:
-      tags:
-      - users
-      summary: Add User
-      parameters:
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
-      responses:
-        201:
-          description: 'Created'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [GET] users/id
-  /users/{id}:
+  # [GET] Newsletter Summary by Newsletter Id
+  /newsletter/summary/:id:
     get:
       tags:
-      - users
-      summary: Find User By Id
+        - newsletter
+      summary: Find Newsletter summary by Id
       parameters:
-      - name: id
-        in: path
-        description: User Id
-        required: true
-        type: integer
+        - name: id
+          in: params
+          required: true
       responses:
         200:
           description: 'OK'
-        409:
-          description: 'Conflict'
         500:
           description: 'Server Error'
 
-# [PUT] users/id
-    put:
+  # [GET] Newsletter Summary Actions by Newsletter Id
+  /newsletter/summary/action/:id:
+    get:
       tags:
-      - users
-      summary: Update User By Id
+        - newsletter
+      summary: Find Newsletter summary actions by Id
       parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+        - name: id
+          in: params
+          required: true
       responses:
         200:
           description: 'OK'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
         500:
           description: 'Server Error'
-
-# [DELETE] users/id
-    delete:
-      tags:
-      - users
-      summary: Delete User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# definitions
-definitions:
-  users:
-    type: object
-    required:
-        - email
-        - password
-    properties:
-      id:
-        type: integer
-        description: user Id
-      email:
-        type: string
-        description: user Email
-      password:
-        type: string
-        description: user Password
 
 schemes:
- - https
- - http
+  - https
+  - http
