@@ -9,18 +9,18 @@ import {
 } from '@/interfaces/newsletterTracking.interface';
 
 class NewsletterTrackingService {
-  public newsletterRepository = NewsletterTrackingEntity;
+  public newsletterEntity = NewsletterTrackingEntity;
 
   public async insert(row: NewsletterTracking): Promise<void> {
-    const repository = getRepository(this.newsletterRepository);
+    const newletterRepository = getRepository(this.newsletterEntity);
 
-    repository.save(row);
+    newletterRepository.save(row);
   }
 
   public async truncate(): Promise<void> {
-    const repository = getRepository(this.newsletterRepository);
+    const newletterRepository = getRepository(this.newsletterEntity);
 
-    repository.clear();
+    newletterRepository.clear();
   }
 
   /**
@@ -28,9 +28,9 @@ class NewsletterTrackingService {
    * Order them by DESC
    */
   public async getUserCountPerDayByUserId(userId: number): Promise<UserCountPerDayInterface[]> {
-    const repository = getRepository(this.newsletterRepository);
+    const newletterRepository = getRepository(this.newsletterEntity);
 
-    const userSummary = repository
+    const userSummary = newletterRepository
       .createQueryBuilder('userTracking')
       .where({ userId })
       .select('COUNT(activityDate) as countPerDay, activityDate')
@@ -46,9 +46,9 @@ class NewsletterTrackingService {
    * Order them by DESC
    */
   public async getNewsletterCountPerDayByNewsletterId(newsletterId: number): Promise<NewsletterCountPerDayInterface[]> {
-    const repository = getRepository(this.newsletterRepository);
+    const newletterRepository = getRepository(this.newsletterEntity);
 
-    const newsletterSummary = repository
+    const newsletterSummary = newletterRepository
       .createQueryBuilder('newsletterTracking')
       .where({ newsletterId })
       .select('COUNT(activityDate) as countPerDay, activityDate')
@@ -64,9 +64,9 @@ class NewsletterTrackingService {
    * Order them by DESC
    */
   public async getNewsletterActivityCountsByNewsletterId(newsletterId: number): Promise<NewsletterActivityInterface[]> {
-    const repository = getRepository(this.newsletterRepository);
+    const newletterRepository = getRepository(this.newsletterEntity);
 
-    const newsletterSummary = repository
+    const newsletterSummary = newletterRepository
       .createQueryBuilder('newsletterActivityTracking')
       .where({ newsletterId })
       .select("activityDate, COUNT(CASE WHEN action = 'open' THEN 1 END) as openCount, COUNT(CASE WHEN action = 'click' THEN 1 END) as clickCount")

@@ -6,16 +6,12 @@ import NewsletterTrackingService from '@/services/newsletterTracking.service';
 class CSVController {
   public csvService = new NewsletterTrackingService();
 
-  constructor() {
-    this.uploadCSV({}, {});
-  }
-
   /**
    * Proccess, format and upload CSV file to Database
    */
-  public uploadCSV = async (req, res): Promise<void> => {
+  public uploadCSV = async (csvPath: string): Promise<void> => {
     try {
-      const source = await csvtojson().fromFile('src/data/user_nl_tracking_data.csv');
+      const source = await csvtojson().fromFile(csvPath);
 
       /**
        * Truncate the table to avoid inconsistencies
@@ -37,7 +33,6 @@ class CSVController {
 
         await this.csvService.insert(row);
       }
-      res.status(200).json({ message: 'Inserted' });
     } catch (error) {
       console.log(error);
     }

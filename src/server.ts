@@ -6,10 +6,9 @@ import IndexRoute from '@routes/index.route';
 import UsersRoute from '@/routes/user.route';
 import validateEnv from '@utils/validateEnv';
 import NewsletterRoute from './routes/newsletter.route';
-import CSVRoute from './routes/csv.route';
 
 validateEnv();
 
-const app = new App([new IndexRoute(), new UsersRoute(), new NewsletterRoute(), new CSVRoute()]);
+const app = new App([new IndexRoute(), new UsersRoute(), new NewsletterRoute()]);
 
 app.listen();

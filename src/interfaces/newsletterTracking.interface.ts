@@ -1,4 +1,5 @@
 export interface NewsletterTracking {
+  id?: number;
   userId: number;
   newsletterId: number;
   action: 'open' | 'click';

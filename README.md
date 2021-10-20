@@ -11,6 +11,7 @@ This project was implemented using:
 In order to start the project on your local machine, You need to:
 
 1.   Open the project in your editor
-2.   Locate configs folder and adjust the values of dbConfig (host, user, password, database) accordingly to Your own Database configuration. 
+2.   Locate configs folder and adjust the values of dbConfig (host, user, password, database) accordingly to Your own Database configuration.
 3.   npm run start - to start the project.
 4.   npm run dev - to start the project with nodemon support.
+5.   After running the project locally, open http://localhost:3000/api-docs to open Swagger Documentation
